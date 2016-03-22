@@ -50,31 +50,6 @@ public class PlayerController : MonoBehaviour {
             direction.y = dy > 0 ? 1.0f : -1.0f;
         }
 
-        // support 2 button direction control
-        if (Input.GetMouseButtonDown(0)) {
-            float x = Input.mousePosition.x;
-            float sWidth = Screen.width;
-            // left
-            if (x < sWidth / 2) {
-                if (direction.x == 1f || direction.x == -1f) {
-                    direction.y = direction.x;
-                    direction.x = 0f;
-                } else if (direction.y == 1f || direction.y == -1f) {
-                    direction.x = -direction.y;
-                    direction.y = 0;
-                }
-            // right
-            } else if (x >= sWidth / 2) {
-                if (direction.x == 1f || direction.x == -1f) {
-                    direction.y = -direction.x;
-                    direction.x = 0f;
-                } else if (direction.y == 1f || direction.y == -1f) {
-                    direction.x = direction.y;
-                    direction.y = 0;
-                }
-            }
-        }
-
         timeAcc += Time.deltaTime;
         if (timeAcc > interval) {
             timeAcc = 0.0f;
@@ -135,6 +110,26 @@ public class PlayerController : MonoBehaviour {
             b1.transform.position = b2.transform.position;
         }
         head.transform.Translate(direction);
+    }
+
+    public void TurnLeft() {
+        if (direction.x == 1f || direction.x == -1f) {
+            direction.y = direction.x;
+            direction.x = 0f;
+        } else if (direction.y == 1f || direction.y == -1f) {
+            direction.x = -direction.y;
+            direction.y = 0;
+        }
+    }
+
+    public void TurnRight() {
+        if (direction.x == 1f || direction.x == -1f) {
+            direction.y = -direction.x;
+            direction.x = 0f;
+        } else if (direction.y == 1f || direction.y == -1f) {
+            direction.x = direction.y;
+            direction.y = 0;
+        }
     }
 
 }
